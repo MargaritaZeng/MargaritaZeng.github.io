@@ -52,17 +52,17 @@ function mousePressed(){
 
 function movement(){
 
-//check for keyboard  presses each frame
-//and move the rectangle accordingly
-
-
-
-  if (keyIsDown(UP_ARROW)) y -= 5;
-  if (keyIsDown(DOWN_ARROW)) y += 5;
-  if (keyIsDown(RIGHT_ARROW)) x += 5;
-  if (keyIsDown(LEFT_ARROW)) x -= 5;
-}
-
+  //check for keyboard  presses each frame
+  //and move the rectangle accordingly
+  
+  
+  
+    if (keyIsDown(UP_ARROW)) y -= 5;
+    if (keyIsDown(DOWN_ARROW)) y += 5;
+    if (keyIsDown(RIGHT_ARROW)) x += 5;
+    if (keyIsDown(LEFT_ARROW)) x -= 5;
+  }
+  
 
 
 
