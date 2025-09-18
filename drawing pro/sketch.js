@@ -68,6 +68,7 @@ function spring(){
   fill(242, 216, 182);
   circle(500, 450, 100);
 
+
   fill(255,181, 176);
   triangle(500, 500, 510, 480, 490, 480);
 
@@ -75,6 +76,8 @@ function spring(){
   circle(525, 455, 10);
   circle(475, 455, 10);
 
+
+//hair
  if (cyrrentBack === 0){
   fill(168, 5, 5);
  }
@@ -89,9 +92,9 @@ function spring(){
  }
 arc(500, 450, 100, 100, PI, 0 );
 triangle(543, 425, 573, 425, 555, 475);
-triangle(463, 425, 493, 425, 555, 475);
-
-
+triangle(425, 425, 457, 425, 444, 475);
+triangle(470, 415, 530, 415, 500, 475);
+triangle(500, 400, 500, 380, 490, 390);
 }
 
 
