@@ -1,6 +1,4 @@
-// Project Title
-// Your Name
-// Date
+// margarita 
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
