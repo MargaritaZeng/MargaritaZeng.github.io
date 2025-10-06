@@ -31,6 +31,9 @@ function draw() {
 }
 
 function generateTerrain(){
+  let countrect = windowWidth / rectwidth;
+  let sumrect = 0;
+
   rectMode(CORNERS);
 
 
@@ -51,7 +54,7 @@ function generateTerrain(){
 
 
     if(y2 > bigestDiamter){
-      bigestsmallestDiamter = y2;
+      bigestDiamter = y2;
       bigestX = i;
       bigestY = height;
       drawFlag();
@@ -61,9 +64,12 @@ function generateTerrain(){
     noStroke();
     fill(179, 98, 191);
     rect(i,height, x2, y2 );
+    sumrect += y2;
    
   }
-  
+  fill(255, 0, 0);
+  let rectAverage = sumrect/countrect;
+  line(0,rectAverage, windowWidth, rectAverage );
 
   
    rectMode(CORNER);
