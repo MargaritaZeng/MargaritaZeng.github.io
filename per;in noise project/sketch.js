@@ -40,7 +40,7 @@ function generateTerrain(){
   let bigestDiamter = Infinity;
   let bigestX = 0;
   let bigestY = 0; 
-  let noiseScale = 0.01 ;
+  //let noiseScale = 0.01 ;
   for (i = 0 ; i< width; i+= rectwidth){
 
     
@@ -67,8 +67,9 @@ function generateTerrain(){
     sumrect += y2;
    
   }
-  fill(255, 0, 0);
+  
   let rectAverage = sumrect/countrect;
+  fill(255, 0, 0);
   line(0,rectAverage, windowWidth, rectAverage );
 
   
