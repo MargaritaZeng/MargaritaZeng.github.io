@@ -17,11 +17,26 @@ function draw() {
   push();
   translate(width/2, height/2);
   circle(0,0, 150);
-  for(let i = 0; i<4 ; i++){
-    line(0, 0, 75, 0)
-    rotate(90);
+
+  let lineAngle = 6;
+  let lineNumber = 60;
+  for(let i = 0; i<lineNumber ; i++){
+    line(65, 0, 71, 0);
+    rotate(lineAngle);
   }
+  
+  
+  for(let x = 0; x<12 ; x++){
+    strokeWeight(3);
+    line(60, 0, 71, 0);
+    rotate(30);
+  }
+  let secondsangle = 6*getSeconds();
+  rotate();
+  line(0,0,74,0);
+
   pop();
+  
 
   //transformation one: TRANSLATION
   // push();
