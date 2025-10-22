@@ -14,7 +14,7 @@
 
 // Global Variables
 let myPlanet;
-
+ 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   angleMode(DEGREES);
