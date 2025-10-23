@@ -10,9 +10,9 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   for ( s = 0; s<=20; s++){
     //w is left e is right
-    let choiseVehicleW = new Vehicle (int(random(2)) ,random(width), random(0, 200), 0 , random(-15, 15) )
+    let choiseVehicleW = new Vehicle (int(random(2)) ,random(width), random(0, 180), 0 , random(-15, 15) )
     westbound.push(choiseVehicleW);
-    let choiseVehicleE = new Vehicle (int(random(2)),random(width), random(205, 400), 1 , random(-15, 15) )
+    let choiseVehicleE = new Vehicle (int(random(2)),random(width), random(205, 380), 1 , random(-15, 15) )
     eastbound.push(choiseVehicleE);
   }
   
@@ -25,7 +25,7 @@ function draw() {
     W.action();
   }
   for (let E of eastbound){
-    //E.action();
+    E.action();
   }
 }
 
@@ -54,16 +54,17 @@ class Vehicle{
       fill(this.c);
       rect(this.x , this.y, 35, 10);
       fill(255);
-      rect(this.x+5 ,this.y+3, 9, 3 );
-      rect(this.x+5 , this.y-13, 9, 3);
-      rect(this.x+21 ,this.y+3, 9, 3 );
-      rect(this.x+21 , this.y-13, 9, 3);
+      rect(this.x ,this.y-6, 9, 5);
+      rect(this.x , this.y+10, 9, 5);
+      rect(this.x+24 ,this.y-6, 9, 5 );
+      rect(this.x+24 , this.y+10, 9, 5);
     }
+    //truck
     else{
       fill(this.c);
-      rect(this.x, this.y, 40, 13);
+      rect(this.x, this.y, 40, 20);
       fill(255, 221, 0);
-      rect(this.x+33, this.y, 1, 13);
+      rect(this.x+25, this.y, 1, 20);
     }
   }
 
@@ -82,21 +83,58 @@ class Vehicle{
 
   }
 
+  speedUp(){
+    if( this.xSpeed < 0 ) {
+      this.xSpeed += random(-5, 0);
+    }
+    else if (this.xSpeed > 0){
+      this.xSpeed += random(5);
+      
+    }
+    else if ( this.xSpeed < 0 && this.d === 0){
+      this.xSpeed === 0;
+    }
+    else if ( this.xSpeed > 0 && this.d === 1){
+      this.xSpeed === 0;
+    }
+  }
+
+  speedDown(){
+    if( this.xSpeed < 0 ) {
+      this.xSpeed -= random(-5, 0);
+     
+    }
+    else if (this.xSpeed > 0){
+      this.xSpeed -= random(5);
+      
+    }
+    else if ( this.xSpeed < 0 && this.d === 0){
+      this.xSpeed === 0;
+    }
+    else if ( this.xSpeed > 0 && this.d === 1){
+      this.xSpeed === 0;
+  }
+}
+
+  changeColor(){
+    color(random(255),random(255),random(255));
+  }
+
   action(){
     this.move();
 
-    // if(int(random(100)) === 66){
-    //   speedUP();
-    // }
-    // else if(int(random(100)) === 78){
-    //   speedDown();
-
-    // }
-    // else if(int(random(100)) === 5){
-    //   changeColor();
-
-    // }
     this.display();
+    if (int(random(100)) === 22){
+      this.speedDown()
+    }
+    else if (int(random(100)) === 36){
+      this.speedUp()
+    }
+    else if (int(random(100)) === 78){
+      this.changeColor()
+    }
+    
+    this.move();
   }
 
 
