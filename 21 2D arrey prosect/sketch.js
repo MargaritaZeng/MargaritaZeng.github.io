@@ -6,24 +6,28 @@
 //0 (black) 255(white)
 
 let grid = [
-  [0,   0,   255, 255, 0  ],
-  [255, 0,   255, 0,   255],
-  [255, 255, 0,   255, 255],
-  [0,   255, 0,   0,   0  ]
+   [0, 0, 0, 0, 0],
+   [255, 0,   255, 0,   255],
+   [255, 255, 0,   255, 255],
+   [0,   255, 0,   0,   0  ]
 ];
-
+//row = y cols = x
 let rows = grid.length;
 let cols = grid[0].length;
 let squareSize = 60;
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  
 }
 
 function draw() {
   background(220);
   renderGrid();
   print(getCurrentX(),getCurrentY());
-  
+  if (allBlack() || allWhite()){
+    
+  }
 }
 
 function mousePressed(){
@@ -33,9 +37,50 @@ function mousePressed(){
   let y = getCurrentY();
 
   //always: flip the "focused" tile
-  flip(x, y);
+  //5 clorchange 
+
+  //flip(x, y);
+
+  if (keyIsDown(SHIFT) ){
+    flip(x, y);
+  
+  }
+  else{
+    //cheater
+    flip(x, y);
+    if (x+1 < cols && x < cols)flip(x+1, y);
+    if (y+1 < rows && y < rows)flip(x, y+1);
+    if (x-1 < cols && x < cols)flip(x-1, y);
+    if (y-1 < rows && y < rows)flip(x, y-1);
+  }
+  
+  
 }
 
+//win the game 
+function allWhite(){
+
+  for (let y = 0; y< rows; y++){
+    for (let x = 0 ; x < cols; x++){
+      if (grid[y][x] !== 255){
+        return false ;
+      }
+    }
+  }
+  return true;
+}
+
+function allBlack(){
+
+  for (let y = 0; y< rows; y++){
+    for (let x = 0 ; x < cols; x++){
+      if (grid[y][x] !== 0){
+        return false ;
+      }
+    }
+  }
+  return true;
+}
 
 function getCurrentX(){
   //determine current col of mouse position
@@ -51,6 +96,7 @@ function getCurrentY(){
 
 function flip(x,y){
   //take a tile @ x, y and inverts its value 
+  //change color 
   if(grid[y][x]=== 0) grid[y][x] = 255;
   else grid [y][x] = 0 ;
 }
@@ -58,6 +104,7 @@ function flip(x,y){
  function renderGrid(){
   //interpret the information in the 2D array, and draw
   // a gaid of square on the screen to reflect it
+  //draw the box 
   for (let y = 0; y< rows; y++){
     for (let x = 0 ; x < cols; x++){
       let fillcolor = grid[y][x];
@@ -66,3 +113,20 @@ function flip(x,y){
     }
   }
  }
+
+
+ function starting(){
+  //black or white
+  //let bow = int(random(0,1));
+  for (let y = 0; y< rows; y++){
+    for (let x = 0 ; x < cols; x++){
+      let bow = int(random(0,1));
+      if (bow = 1 ){
+        flip(x, y);
+      }
+     }
+ 
+    }
+  }
+ 
+  
