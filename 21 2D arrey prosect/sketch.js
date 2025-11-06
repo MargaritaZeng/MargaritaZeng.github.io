@@ -17,16 +17,21 @@ let cols = grid[0].length;
 let squareSize = 60;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
-  
+  createCanvas(cols*squareSize, rows*squareSize);
+  starting();
+
 }
 
 function draw() {
   background(220);
   renderGrid();
   print(getCurrentX(),getCurrentY());
+  overday();
   if (allBlack() || allWhite()){
-    
+    fill(168, 23, 235);
+    textSize(30);
+    textAlign(CENTER, CENTER);
+    text("you win !", width /2 , height /2);
   }
 }
 
@@ -55,6 +60,19 @@ function mousePressed(){
   }
   
   
+}
+
+function overlay(x, y){
+  // cross or square
+  //cross or suare number
+  // let mousex = getCurrentX();
+  // let mousey = getCurrentY();
+  let csnumber = 1;
+  if (csnumber%2 === 1){
+    fill(216, 133, 255);
+    square(x, y, squareSize);
+    
+  }
 }
 
 //win the game 
@@ -115,17 +133,16 @@ function flip(x,y){
  }
 
 
- function starting(){
-  //black or white
-  //let bow = int(random(0,1));
+  function starting(){
+  // black or white
+  // let bow = int(random(0,2));
   for (let y = 0; y< rows; y++){
     for (let x = 0 ; x < cols; x++){
-      let bow = int(random(0,1));
-      if (bow = 1 ){
+      let bow = int(random(0,2));
+      if (bow === 1 ){
         flip(x, y);
       }
-     }
- 
+     } 
     }
   }
  
