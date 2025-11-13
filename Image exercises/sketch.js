@@ -1,7 +1,8 @@
-// image Manipulation
-// Margarita 
-// Nov 12
+// exercise
+// margarita
+// nov 13
 
+// majority color
 let pilot;
 
 
@@ -12,19 +13,19 @@ function setup() {
 }
 
 async function loadAssets(){
-  //pilot = await loadImage("assets/aviator.png");
-  pilot = await createVideo("assets/bball.mp4")
-  pilot.hide();
+  pilot = await loadImage("assets/chip.jpg");
+  
+  
   
 }
 
-let started = false
+// let started = false
 
-function mousePressed(){
-  started = true;
-  resizeCanvas(pilot.width, pilot.height, false);
-  pilot.loop();
-}
+// function mousePressed(){
+//   started = true;
+//   resizeCanvas(pilot.width, pilot.height, false);
+//   pilot.loop();
+// }
 
 function setPixelOneD (pos, r, g, b){
   pixels[pos] = r;
@@ -43,8 +44,8 @@ function draw() {
     loadPixels();
   //setPixelOneD(8, 0, 255, 0);
   //setPixel(10, 10, 0, 0, 255);
-    background(0);
-    textImage();
+  background(0);
+  textImage();
   }
   
   // boost();
@@ -60,22 +61,23 @@ function textImage(){
   for(let x = 0 ; x< width ; x+=scaleAmount){
     for (let y = 0 ; y<height; y+= scaleAmount){
       let avg = getAvg(x, y);
-      if (avg >220)    text("%", x, y);
-      else if(avg>180) text("O", x, y);
-      else if(avg>140) text("l", x, y);
-      else if(avg>100) text("=", x, y);
-      else if(avg>40)  text(",", x, y);
-              
+      if (avg = 1) fill()
     }
   }
 }
 
-function getAvg(x, y, ){
+function getAvg(x, y){
   let i = (width*y +x)*4;
   let r = pixels[i]; 
   let g = pixels[i+1]; 
   let b = pixels[i+2];
-  return (r+g+b)/3
+  if (r>g && r>b)   return 1 ;
+  if (g>b && g>r)   return 2 ;
+  if (b>r && b>g)   return 3 ;
+  if (r=g && r>b)   return 1 ;
+  if (r=b && r>g)   return 1 ;
+  if (g=b && g>r)   return 2 ;
+  //return (r+g+b)/3
 }
 
 function greyscale(){
