@@ -43,8 +43,8 @@ function draw() {
     loadPixels();
   //setPixelOneD(8, 0, 255, 0);
   //setPixel(10, 10, 0, 0, 255);
-    background(0);
-    textImage();
+  background(0);
+  textImage();
   }
   
   // boost();

@@ -4,12 +4,20 @@
 //
 
 //0 (black) 255(white)
+let csnumber = 1;
+
 
 let grid = [
-   [0, 0, 0, 0, 0],
-   [255, 0,   255, 0,   255],
-   [255, 255, 0,   255, 255],
-   [0,   255, 0,   0,   0  ]
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+   [255,0,255, 0,255, 0, 0, 0, 0, 0],
+   [255,255,0,255,255,0,0,0,0,0 ],
+   [0,255,0,0,0,0,0,0,0,0],
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+   [255,0,255, 0,255, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+   [255,0,255, 0,255, 0, 0, 0, 0, 0],
+   [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ],
+   [255,0,255, 0,255, 0, 0, 0, 0, 0],
 ];
 //row = y cols = x
 let rows = grid.length;
@@ -19,6 +27,7 @@ let squareSize = 60;
 function setup() {
   createCanvas(cols*squareSize, rows*squareSize);
   starting();
+  //change to suqar or +
 
 }
 
@@ -26,12 +35,20 @@ function draw() {
   background(220);
   renderGrid();
   print(getCurrentX(),getCurrentY());
-  overday();
+  //color perple
+  overlay(getCurrentX(), getCurrentY());
+  //check if win
   if (allBlack() || allWhite()){
     fill(168, 23, 235);
     textSize(30);
     textAlign(CENTER, CENTER);
     text("you win !", width /2 , height /2);
+  }
+}
+
+function keyPressed(){
+  if (key === " "){
+    csnumber ++;
   }
 }
 
@@ -50,7 +67,14 @@ function mousePressed(){
     flip(x, y);
   
   }
-  else{
+  else if (csnumber%2 === 1){
+    //squar
+    if (x < cols && y < rows) flip(x, y);
+    if (x+1 < cols && y < rows) flip(x+1, y);
+    if (x < cols && y+1 < rows) flip(x, y+1);
+    if (x+1 < cols && y+1 < rows) flip(x+1, y+1);
+  }
+  else if (csnumber%2 === 0){
     //cheater
     flip(x, y);
     if (x+1 < cols && x < cols)flip(x+1, y);
@@ -67,13 +91,34 @@ function overlay(x, y){
   //cross or suare number
   // let mousex = getCurrentX();
   // let mousey = getCurrentY();
-  let csnumber = 1;
-  if (csnumber%2 === 1){
-    fill(216, 133, 255);
-    square(x, y, squareSize);
+  if (keyIsDown(SHIFT) ){
+    fill(216, 133, 255, 100);
+    square(x*squareSize, y*squareSize, squareSize);
+  
+  }
+  else if (csnumber%2 === 1){
+    fill(216, 133, 255, 100);
+    if (x < cols && y < rows) square(x*squareSize, y*squareSize, squareSize);
+    if (x+1 < cols && y < rows) square((x+1)*squareSize, y*squareSize, squareSize);
+    if (x < cols && y+1 < rows) square(x*squareSize, (y+1)*squareSize, squareSize);
+    if (x+1 < cols && y+1 < rows) square((x+1)*squareSize, (y+1)*squareSize, squareSize);
+
+  }
+  else if (csnumber%2 === 0){
+    
+    fill(216, 133, 255, 100);
+    if (x < cols && y < rows) square(x*squareSize, y*squareSize, squareSize);
+    if (x+1 < cols && y < rows) square((x+1)*squareSize, y*squareSize, squareSize);
+    if (x-1 < cols && y < rows) square((x-1)*squareSize, y*squareSize, squareSize);
+    if (x < cols && y+1 < rows) square(x*squareSize, (y+1)*squareSize, squareSize);
+    if (x < cols && y-1 < rows) square(x*squareSize, (y-1)*squareSize, squareSize); 
     
   }
+  
 }
+
+
+
 
 //win the game 
 function allWhite(){
