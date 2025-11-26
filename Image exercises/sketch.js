@@ -6,6 +6,7 @@ let race;
 let Butter;
 let chip ;
 let nuit ;
+let hand ;
 
 async function setup() {
   
@@ -15,8 +16,9 @@ async function setup() {
   Butter = await loadImage("assets/butterfly.jpg");
   chip = await loadImage("assets/chip.jpg");
   nuit = await loadImage("assets/nuit.jpg");
+  hand = await loadImage("assets/hand.jpg");
   createCanvas(1200, 1200);
-  noLoop();
+  
 
 }
 
@@ -24,6 +26,7 @@ async function setup() {
 //                 halve the blue component
 // R G B A R G B A
 
+// half no green
 function colorEffect(){
   //use the single loop strategy
   //let halfImage = 4*height*(width/2);
@@ -37,6 +40,7 @@ function colorEffect(){
   }
 }
 
+//change the place
 function Movebetter(x, y){
   //the butterfly pro
   let a = get(x,y, x/2, y+150);
@@ -50,6 +54,7 @@ function Movebetter(x, y){
   image(d, 300, 0);
 }
 
+// change color to 5 color
 function getAvg(x, y) {
   let i = (nuit.width * y + x) * 4
   let r = nuit.pixels[i];
@@ -58,16 +63,14 @@ function getAvg(x, y) {
   return (r + g + b) / 3
 }
 
+// change color to 5 color
 let One ;let two ; let three;  
 function colorPosterize(){
-
-
-
 
 for (let y = 0; y < nuit.height; y++) {
     for (let x = 0; x < nuit.width; x++) {
       let avg = getAvg(x, y);
-      print(avg);
+      //print(avg);
       if (205< avg && avg >255){
         One = 170 ;
         two = 230 ;
@@ -103,7 +106,7 @@ for (let y = 0; y < nuit.height; y++) {
   }
 
 }
-
+// change color to 5 color
 function setpixel(x, y, r, g, b) {
   let i = (x + y * nuit.width) * 4;
   nuit.pixels[i + 0] = r;
@@ -112,6 +115,7 @@ function setpixel(x, y, r, g, b) {
   nuit.pixels[i + 3] = 255;
 }
 
+// change color to rgb
 function getBigest(x, y) {
   let i = (chip.width * y + x) * 4
   let r = chip.pixels[i];
@@ -127,6 +131,7 @@ function getBigest(x, y) {
   else if (g>r && g===b) return 2;
 }
 
+// change color to rgb
 function setpixelC(x, y, r, g, b) {
   let i = (x + y * chip.width) * 4;
   chip.pixels[i + 0] = r;
@@ -135,6 +140,7 @@ function setpixelC(x, y, r, g, b) {
   chip.pixels[i + 3] = 255;
 }
 
+// change color to rgb
 function MajorityColor(){
   for(let y = 0; y <chip.height; y++){
     for(let x = 0; x<chip.width; x++){
@@ -149,33 +155,50 @@ function MajorityColor(){
 
 }
 
-function draw() {
-  
-  background(220);
+//the mirror of hand
+function mirror(){
+  for(let y = 100; y < 901 ; y+=2){
+    for(let x = 150; x<301; x+=2){
+      let changex = x-hand.width/2 ;
+      copy(hand, x, y, 2, 2, 150-changex, y, 2, 2);
+
+    }
+  }
+}
+
+function result(){
+   background(220);
   image(race,0,0, 300, 300);
   image(Butter, 300, 0, 300, 300);
   Movebetter(300, 0);
   image(nuit, 300, 300, 300, 300);
   //colorPosterize();
   image(chip, 0, 300, 300, 300);
-
+  image(hand, 0, 600, 300, 300);
 
   chip.loadPixels(); 
-  MajorityColor()
-  chip.updatePixels(); 
- 
- 
+  MajorityColor() 
+  hand.loadPixels(); 
+  mirror();
   race.loadPixels(); //populate the pixels array
-  colorEffect();
-  race.updatePixels(); 
-
- 
+  colorEffect(); 
   nuit.loadPixels(); 
-  colorPosterize()
-  nuit.updatePixels(); 
- 
+  colorPosterize();
 
+  nuit.updatePixels();
+  chip.updatePixels(); 
+  race.updatePixels();
+  hand.updatePixels(); 
+
+   if (frameCount === 2){
+    noLoop();
+   }
+}
+
+function draw() {
+    result();
   
+ 
   
   
 }
