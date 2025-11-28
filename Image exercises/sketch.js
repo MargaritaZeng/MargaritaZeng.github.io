@@ -54,6 +54,27 @@ function Movebetter(x, y){
   image(d, 300, 0);
 }
 
+//X-Blur Effect of nuit 
+function Xblur(radius){
+  for(let y = 600; y < nuit.height ; y++){
+    for(let x = 300; x<nuit.width; x++){
+      for(let count = 0; count<radius; count++){
+         //the pixcel
+      let i = (nuit.width * y + x) * 4
+      let allR = nuit.pixels[i];
+      let allG = nuit.pixels[i + 1];
+      let allB = nuit.pixels[i + 2];
+
+      let x1 = 
+
+      }
+     
+    }
+  }
+
+}
+
+
 // change color to 5 color
 function getAvg(x, y) {
   let i = (nuit.width * y + x) * 4
@@ -157,14 +178,15 @@ function MajorityColor(){
 
 //the mirror of hand
 function mirror(){
-  for(let y = 100; y < 901 ; y+=2){
-    for(let x = 150; x<301; x+=2){
-      let changex = x-hand.width/2 ;
-      copy(hand, x, y, 2, 2, 150-changex, y, 2, 2);
+  for(let y = 0; y < 300; y+=1){
+    for(let x = 0; x<150; x+=1){
+      copy(hand, 600-2*x, 2*y, 1, 1,x,y+600,1,1);
 
     }
   }
 }
+
+
 
 function result(){
    background(220);
@@ -172,6 +194,7 @@ function result(){
   image(Butter, 300, 0, 300, 300);
   Movebetter(300, 0);
   image(nuit, 300, 300, 300, 300);
+  image(nuit, 300, 600, 300, 300);
   //colorPosterize();
   image(chip, 0, 300, 300, 300);
   image(hand, 0, 600, 300, 300);
