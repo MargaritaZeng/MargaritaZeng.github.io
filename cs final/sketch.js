@@ -2,79 +2,11 @@
 // Margarita
 // Dec 8
 
-// check if is in the strating page 
-let startpage = true;
-// check if the startpage button is cilck
-let buttonOfstartpage = false;
-
-
-
-//name of the starting page 
-let mainimg ;
-let gamename ;
-let illustration ;
-let propBack ;
-let settingButton ;
-let startGameButton ;
-
-// let the button highlight 
-let illustrationHL ;
-let propBackHL ;
-let settingButtonHL ;
-let startGameButtonHL ;
-
-//img of the mainthing in buttons
-let bagimg;
-let backimg;
-let buttonimg;
-let backbuttonimg;
-let setbuttonimg;
-let illustrationimg;
-let progreimg;
-let backHomeimg;
-
-//img of the mainthing in buttons hight light thing 
-let buttonimgHL;
-let illustrationimgHL;
-let progreimgHL;
-let backHomeimgHL;
-
-// load img of the starting page img
-
-async function startpageImg(){
-  mainimg = await loadImage("rpggameImg/startpage/backpage.png");
-  gamename = await loadImage("rpggameImg/startpage/gamename.png");
-  illustration = await loadImage("rpggameImg/startpage/illustration Bu.png");
-  propBack = await loadImage("rpggameImg/startpage/prop back Bu.png");
-  settingButton = await loadImage("rpggameImg/startpage/setting Bu.png");
-  startGameButton = await loadImage("rpggameImg/startpage/start game Bu.png");
-//--------------------startpage img of main buttons----------------------------
-
-  bagimg = await loadImage("rpggameImg/initial functions/bagimg.png");
-  backimg = await loadImage("rpggameImg/initial functions/backimg.png");
-  buttonimg = await loadImage("rpggameImg/initial functions/button setting Bu.png");
-  backbuttonimg = await loadImage("rpggameImg/initial functions/button backpage.png");
-  setbuttonimg = await loadImage("rpggameImg/initial functions/button setup.png");
-  illustrationimg = await loadImage("rpggameImg/initial functions/illustration Bu.png");
-  progreimg = await loadImage("rpggameImg/initial functions/task progre Bu.png");
-  backHomeimg = await loadImage("rpggameImg/initial functions/backhome Bu.png");
-
-}
-
-async function startpageImgHL(){
-  illustrationHL = await loadImage("rpggameImg/startpage/illustration HL.png");
-  propBackHL = await loadImage("rpggameImg/startpage/prop back HL.png");
-  settingButtonHL = await loadImage("rpggameImg/startpage/setting HL.png");
-  startGameButtonHL = await loadImage("rpggameImg/startpage/start game HL.png");
-//-----------------startpage img of the hight light buttton-----------------------
-
-  illustrationimgHL = await loadImage("rpggameImg/initial functions/illustration HL.png");
-  progreimgHL = await loadImage("rpggameImg/initial functions/task progre HL.png");
-  backHomeimgHL = await loadImage("rpggameImg/initial functions/backhome HL.png");
-  buttonimgHL = await loadImage("rpggameImg/initial functions/button setting HL.png");
-}
-
+//check the gamestatus in the game 
+let gameStatus = "startpage" ;
 // --------------------------------seting -----------------------------
+
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
 
@@ -87,26 +19,32 @@ function setup() {
 function draw() {
   background(220);
   //img 3:2
+  // always the backround
+  
   //this is for starting bage 
-  if(returnHome){
-    startpage = true;
-    buttonOfstartpage = false;
-  }
 
-  if (startpage){
+  if (gameStatus === "startpage"){
     //this is the start page img 
     showStartingpage();
   }
+
+  //this is Highlight the start page button 
+  mainbuttonHL();
 //-----------startpage-----------
 
-  if(buttonOfstartpage){
+  if(gameStatus === "mainpage" ){
     image(backimg, 0, 0, 1200, 800);
     if(highlightButton===2) settingUp();
     else if(highlightButton=== 3) showImg();
     else if(highlightButton=== 4) propBag();
   }
-  //this is Highlight the button 
-  mainbuttonHL();
+
+  if(gameStatus === "inButton" ){
+    image(backimg, 0, 0, 1200, 800);
+    if(highlightButton===2) settingUp();
+    else if(highlightButton=== 3) showImg();
+    else if(highlightButton=== 4) propBag();
+  }
 }
 //--------------------------------setup and drawing ---------------------------
 
@@ -126,7 +64,7 @@ function showStartingpage(){
 function mainbuttonHL(){
 
   //this is the starting page showing the highlight button
-  if(startpage){
+  if(gameStatus === "startpage"){
     if(highlightButton===1) image(startGameButtonHL, 0, 0, 1200, 800);
     if(highlightButton===2) image(settingButtonHL, 200, 150, 1200, 800);
     if(highlightButton===3) image(illustrationHL, 0, 0, 1200, 800);
@@ -139,13 +77,12 @@ let highlightButton = 1;
 // this is to check the main page hight light button
 let highlightButtonM = 1;
 
-let returnHome = false
 
 
 
 function keyPressed(){
   //this is the starting page keycode
-  if (startpage){
+  if (gameStatus === "startpage"){
     if (key === "w" || keyIsDown(38)){
       if (highlightButton === 4){
         highlightButton = 1;
@@ -158,12 +95,11 @@ function keyPressed(){
       }
       else highlightButton--;
     }
-    if(key ===" "){
-      buttonOfstartpage = true;
-      startpage = false;
+    if(key === " "){
+      gameStatus = "mainpage";
     }
   }
-  if(buttonOfstartpage){
+  else if(gameStatus === "mainpage"){
     if (key === "w" || keyIsDown(38)){
       highlightButtonM++;
     }
@@ -172,9 +108,15 @@ function keyPressed(){
     }
     if (key === " "){
       if(highlightButtonM === 1){
-        returnHome = true;
+        gameStatus = "startpage";
+      }
+      else{
+        gameStatus = "inButton";
       }
     }
+  }
+  else if(gameStatus === "inButton"){
+    if(key === " ") gameStatus ="mainpage";
   }
 
 }
@@ -184,7 +126,7 @@ function keyPressed(){
 
 // the setting thing in the mainpage 
 function settingUp(){
-  if(buttonOfstartpage){
+  if(gameStatus === "mainpage"){
     image(backbuttonimg, 0, 0, 1200, 800);
     image(buttonimg, 0, 100, 1200, 800);
     //return home img
@@ -198,10 +140,15 @@ function settingUp(){
     else if(highlightButtonM===2) image(buttonimgHL, 0, 100, 1200, 800);
 
   }
+  //in the button img
+  else if(gameStatus === "inButton"){
+    image(setbuttonimg, 0, 0, 1200, 800);
+    image(backHomeimgHL, 100, -50, 1200, 800);
+  }
 }
 // the bag in main page
 function propBag(){
-  if(buttonOfstartpage){
+  if(gameStatus === "mainpage"){
     image(bagimg, 0, 0, 1200, 800);
     //return home img
     image(backHomeimgHL, 100,-50, 1200, 800);
@@ -210,7 +157,7 @@ function propBag(){
 }
 //show img in the main page 
 function showImg(){
-  if(buttonOfstartpage){
+  if(gameStatus === "mainpage"){
     image(backbuttonimg, 0, 0, 1200, 800);
     image(illustrationimg, 0, 0, 1200, 800);
     image(progreimg, 0, 0, 1200, 800);
@@ -226,5 +173,20 @@ function showImg(){
     else if(highlightButtonM===2) image(progreimgHL, 0, 0, 1200, 800);
 
   }
+
+  else if(gameStatus === "inButton"){
+
+
+    if(highlightButtonM===3){
+      image(illBackimg, 0, 0, 1200, 800);
+      image(backHomeimgHL, 100,-50, 1200, 800);
+    }
+    else{
+      image(proFirst, 0, 0, 1200, 800);
+      image(backHomeimgHL, 100,-50, 1200, 800);
+    }
+  }
 }
+
+
 // to start the game 
