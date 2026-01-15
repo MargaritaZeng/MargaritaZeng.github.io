@@ -4,8 +4,8 @@
 
 //check the gamestatus in the game 
 let gameStatus = "startpage" ;
-// startpage mainpage inbutton plot
-
+// startpage mainpage inbutton plot chapterName changeMap
+let taskNew ="off";
 
 //this is to check the highlight button of starting bage 
 let highlightButton = 1;
@@ -22,7 +22,7 @@ let settingG = "closed";
 // inside is setting open the button
 //this is in the game part
 
-let storyList = 130 ;
+let storyList = 140 ;
 
 // --------------------------------seting -----------------------------
 
@@ -36,6 +36,7 @@ function setup() {
   gamingImg();  
 }
 
+
 function draw() {
   background(220);
   //img 3:2
@@ -43,20 +44,17 @@ function draw() {
   image(backimg, 0, 0, 1200, 800);
   //this is for starting bage 
 
+  //-----------------------------start page ----------------------
   if (gameStatus === "startpage"){
     //this is the start page img 
     showStartingpage();
-
+    //this is Highlight the start page button 
     if(highlightButton===1) image(startGameButtonHL, 0, 0, 1200, 800);
     else if(highlightButton===2) image(settingButtonHL, 200, 150, 1200, 800);
     else if(highlightButton===3) image(illustrationHL, 0, 0, 1200, 800);
     else if(highlightButton===4) image(propBackHL, 0, 0, 1200, 800);
   }
-
-  //this is Highlight the start page button 
-
-//-----------startpage-----------
-
+  //--------------------------main page----------------------------
   if(gameStatus === "mainpage" ){    
     if(highlightButton===2) settingUp();
     else if(highlightButton=== 3) showImg();
@@ -69,38 +67,68 @@ function draw() {
     else if(highlightButton=== 4) propBag();
   }
 
-
-// ----- start the game -----plot part -----------
+//------------------the story part---------------------
+  if(gameStatus ==="chapterName"){
+    image(chapterName, 0, 0, 1200, 800);
+    fill(222, 47, 172);
+    textSize(44);
+    text("press space", 900, 780);
+  }
+  // 27 30 32 72 91 110 +1
+  if(gameStatus === "plot"){  
+    plotFirst();
+    emojy();
+    rpgMap(); 
+  }
   
 
+  // ---------------------seting in the game------------ ----------
   if(settingG === "inside"){
     if(highlightButtonG === 1) propBag();
     else if(highlightButtonG === 2) settingUp();
+    else if(highlightButtonG === 5)showImg();  
     else if(highlightButtonG === 3){
       gameStatus = "startpage";
       settingS++;
     } 
-    else if(highlightButtonG === 5)showImg();  
   }
-
   if(settingG === "open"){
     //show the setting buttonS
     image(setButtonG, 0, -30, 1200, 800);
     settingInside();
   } 
-
-  if(gameStatus === "plot"){  
-    plotFirst();
-    
+  if(taskNew === "on"){
+    image(taskN, 0, 0, 1200, 800);
   }
 
- }
+  stateCheck();
+} 
+//-----------------------------------------setup and drawing ----------------------------------------------------
+
+// check if there are some of the img to show when the story go on 
+// and check if is the time to chage the img
+function stateCheck(){
+  //show the chapter name 
+  if(storyList === 31){
+    gameStatus = "chapterName";
+  } 
+  // show the progress at first 
+  if(storyList > 10 && storyList < 14){
+  image(task01, 180, 45, 825, 550);
+  }
   
-//--------------------------------setup and drawing ---------------------------
+  if(storyList === 14 || storyList === 53 || storyList === 73 || storyList === 105 || storyList === 141){
+    taskNew = "on" ;
+  }
+  
+}
+
+
+
 
 //show the page of the starting page 
 function showStartingpage(){
-  image(mainimg , 0, 0, 1200, 800);
+  image(mainimg , 0, 0, 1200, 800); 
   image(gamename , 0, 0, 1200, 800);
   image(illustration , 0, 0, 1200, 800);
   image(propBack , 0, 0, 1200, 800);
@@ -156,15 +184,24 @@ function keyPressed(){
   else if(settingG === "inside"){
     if(key === " ") settingG = "open" ;
   }
+
+  else if(gameStatus === "chapterName"){
+    if(key === " ") {
+      gameStatus = "plot" ;
+      storyList++;
+    }
+  }
 //-------this is the setting in game's keycode-------------------------------------
   else if(settingG === "open"){
     // open the setting in game 
     if(keyIsDown(16)){
+      if(taskNew === "on") taskNew = "off" ;
       settingS++;
     }
 
     //setting in game 
     else if(settingS%2 === 0){
+      
       if (key === "w" || keyIsDown(38)){
         if (highlightButtonG === 1) highlightButtonG = 5;
         else highlightButtonG--;
@@ -179,14 +216,19 @@ function keyPressed(){
     //-------this is the story part keycode------------------------------
     else if(gameStatus === "plot"){
       if(key === " "){
-        storyList++ ;
-      }
-    }
-    
+        if(storyList > 142){
+          settingG = "closed" ;
+          gameStatus = "startpage";
+          taskNew = "off";
+          storyList = 142;
+        }
+        else storyList++ ;
+      } 
+      
+    }    
   }
 
-
-
+  
 }
 
 //functions of press mainpages button things
@@ -206,7 +248,6 @@ function settingUp(){
     // 1 always be the backhome betton
     else if(highlightButtonM===1) image(backHomeimgHL, 100, -50, 1200, 800);
     else if(highlightButtonM===2) image(buttonimgHL, 0, 100, 1200, 800);
-
   }
 
   //in the button img and the setting in game's img
@@ -214,7 +255,6 @@ function settingUp(){
     image(setbuttonimg, 0, 0, 1200, 800);
     image(backHomeimgHL, 100, -50, 1200, 800);
   }
-
 }
 
 // the bag in main page
@@ -253,7 +293,15 @@ function showImg(){
 
     if(highlightButtonM===2){
       // show the progress in game and startpage
-      image(proFirst, 0, 0, 1200, 800);
+      //(storyList === 53 || storyList === 73 || storyList === 105 || storyList === 141)
+      //   12=>01      02                  03                   04                  05
+      if(storyList<12) image(proFirst, 0, 0, 1200, 800);
+      else if(storyList>11 && storyList<53) image(task01, 0, 0, 1200, 800);
+      else if(storyList>52 && storyList<73) image(task02, 0, 0, 1200, 800);
+      else if(storyList>72 && storyList<105) image(task03, 0, 0, 1200, 800);
+      else if(storyList>104 && storyList<141) image(task04, 0, 0, 1200, 800);
+      else image(task05, 0, 0, 1200, 800);
+
       image(backHomeimgHL, 100,-50, 1200, 800);
     }
     else{
@@ -264,7 +312,13 @@ function showImg(){
 
   else if (settingG === "inside"){
     // show the progress in game and startpage
-    image(proFirst, 0, 0, 1200, 800);
+    if(storyList<12) image(proFirst, 0, 0, 1200, 800);
+    else if(storyList>11 && storyList<53) image(task01, 0, 0, 1200, 800);
+    else if(storyList>52 && storyList<73) image(task02, 0, 0, 1200, 800);
+    else if(storyList>72 && storyList<105) image(task03, 0, 0, 1200, 800);
+    else if(storyList>104 && storyList<141) image(task04, 0, 0, 1200, 800);
+    else image(task05, 0, 0, 1200, 800);
+
     image(backHomeimgHL, 100,-50, 1200, 800);
   }
 
@@ -362,7 +416,7 @@ function plotFirst(){
   else if(conversation[storyList][0] === "narrator"){
     image(nameBoxL, 0, 0, 1200, 800);
 
-    text(conversation[storyList][0],255, 602);
+    text("???",285, 602);
   }
 
   //print the name
@@ -371,13 +425,43 @@ function plotFirst(){
   fill(0);
   textSize(30);
   text(conversation[storyList][2],240, 675, 720, 200);
-  //fill(217, 137, 52, 50)
-  //rect(220, 605, 720, 200);
 }
 
-// let nemorin;
-// let npc;
-// let theCat;
-// let theCatP;
-// let serenie;
-// let vallerin;
+// the emojy img show out
+
+function emojy(){
+
+  if(conversation[storyList][0] === "the cat"){
+    if(conversation[storyList][1] === "sad")image(sadC, 0, 0, 1200, 800);
+    else if(conversation[storyList][1] === "speechless")image(speechlessC, 0, 0, 1200, 800);
+    else if(conversation[storyList][1] === "happy")image(happyC, 0, 0, 1200, 800);
+    else if(conversation[storyList][1] === "impatient")image(impatientC, 0, 0, 1200, 800);
+    else if(conversation[storyList][1] === "confuse")image(confuseC, 0, 0, 1200, 800);
+    else if(conversation[storyList][1] === "surprise")image(surpriseC, 0, 0, 1200, 800);
+  }
+  else{
+    if(conversation[storyList][1] === "sad")image(sad, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "speechless")image(speechless, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "happy")image(happy, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "impatient")image(impatient, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "confuse")image(confuse, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "surprise")image(surprise, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "cry")image(cry, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "frown")image(frown, 45, 0, 1200, 800);
+    else if(conversation[storyList][1] === "smile")image(smile, 45, 0, 1200, 800);
+  }
+}
+// 27 30 32 72 91 110 +1
+
+function rpgMap(){
+  if(storyList < 31){
+    image(officeMap, 0, 0, 1200, 800);
+    image(vallerinL, )
+  } 
+  else if(storyList >30 && storyList < 73){
+    image(roadMap, 0, 0, 1200, 800);
+  } 
+  else if(storyList >72 && storyList < 92){
+    image(inHouseMap, 0, 0, 1200, 800);
+  } 
+}

@@ -10,7 +10,7 @@ let conversation =[//-2
     ["nemorin", "normal","You've been freeloading at my place for quite a while, "],
     ["nemorin", "normal"," I should really start charging you"],
     ["the cat", "speechless","What do you want?"],
-    ["nemorin", "happy","Ta-daa! This!"],
+    ["nemorin", "happy","Ta-daa! This!"],// show the progress
     ["nemorin", "normal","Find the Lost Souls."],
     ["nemorin", "normal"," You can see souls anyway,  it shouldn't be hard for you"],
     ["narrator", "none","Oh right, I forgot to mention—"],
@@ -26,14 +26,14 @@ let conversation =[//-2
     ["nemorin", "happy","But I've got no one else right now, so it's all on you."],
     ["nemorin", "happy","Don't miss me too much, okay?"],
     ["nemorin", "normal"," If you need anything, just call me."],
-    ["nemorin", "normal"," I'm on standby 24h to… "],
+    ["nemorin", "normal"," I'm on standby 24h to… "],// move
     ["nemorin", "cry","Hey—I didn,t  finish my word!!"],
     ["the cat", "speechless","Ugh… humans are so noisy."],
     ["the cat", "speechless"," Whatever. Let's go"],
-    // first part -------(-3)
+    // first part -------(-3) show the chapter transition
     ["the cat","normal","Should be around here…"],
     ["the cat","normal","Now… who is the lost soul?"],
-    // ---- start part ----(-4)
+    // ---- start part ----(-4) find people transition
     ["the cat","normal","Meow. Hello ,Can you see me?"],
     ["elderly woman","normal","......"],
     ["the cat","confuse","Can't you hear me ? I'm right here."],
@@ -73,8 +73,8 @@ let conversation =[//-2
     ["the cat","confuse","Huh?"],
     ["elderly woman","normal","I think I saw his workplace address somewhere… but I forgot where it is…"],
     ["elderly woman","confuse","It should be somewhere inside the house…"],
-    ["narrator","none","Looks like you'll have to search the room."],
-    //-----------------------------------(-5)
+    ["narrator","none","Looks like you'll have to search the room."],//find 
+    //-----------------------------------(-5)transition
     ["elderly woman","surprise","Ah—yes, yes! That's the place!"],
     ["the cat","normal","Great, then let's find him. It's close by."],
     ["elderly woman","confuse","But…How am I supposed to go anywhere?"],
@@ -92,10 +92,10 @@ let conversation =[//-2
     ["the cat","normal"," Knowing a few tricks like this aren't hard."],
     ["the cat","normal"," So—where's the car key?"],
     ["elderly woman","normal","emm….. it's in my bedroom"],
-    //----------------------------------------------(-6)
-    ["narrator","none","Of course to drive a car,    grab the key  little kitty—"],
+    ["narrator","none","Of course to drive a car, grab the key little kitty—"],
     ["narrator","none"," Let's catch him before he gets off work."],
-    ["the cat","normal","How should I address you?"],
+    //----------------------------------------------(-6)find get the key and out of the bed room
+    ["the cat","normal","How should I address you?"],// in the car
     ["sereniel","normal","My name Serenie. And you?"],
     ["the cat","normal","Just call me the Cat."],
     ["the cat","normal"," So… could you tell me about you and your son?"],
@@ -113,12 +113,12 @@ let conversation =[//-2
     ["sereniel","normal"," I don't really have to meet him."],
     ["sereniel","normal"," It'd be troublesome…"],
     ["sereniel","normal"," And what if I bother him?"],
-    ["the cat","normal","We're already  here."],
+    ["the cat","normal","We're already  here."],//comment
     //-------------------------------------------------(-7)
     ["sereniel","surprise","?! Already? That was so fast!"],
     ["narrator","none","Well, yeah. Teleportation devices are fast."],
-    ["narrator","none","(Time to head inside and look for him.)"],
-    //-----------------------------------------------(-8)
+    ["narrator","none","(Time to head inside and look for him.)"],// set the car
+    //-----------------------------------------------(-8)// in comment
     ["receptionist","smile","Hello! How can I help you today?"],
     ["the cat","normal","Hi, I'm here to see Mr. Vallerin."],
     ["receptionist","smile","All right—do you have any appointment?"],
@@ -150,20 +150,28 @@ let conversation =[//-2
 
 ];
 
-
+// home npc --cople
 let cople =[
     ["girl","That's weird… I feel like someone's staring at me."],
     ["boy","Honey, it's just your imagination. There's barely anyone on this street."],
     ["girl","…Wish so"],
 ];
-
+// home npc 
 let interaction =[
     ["young man","Changed to a child? Really?"],
     ["old man","It's definitely a woman you're looking for, not a man."],
     ["correct","…It's her."],
 ];
+//  things in home map
+let newspaper =[
+    ["'A medium helping spirits solve cases for the police…'"],
+    ["'A new Knight Commander sworn in'"],
+    ["'A day in the life of the Knight Commander'"],
+    ["'Shocking! The young Knight Commander turns out to be in his second marriage'"],
+    ["'—and already has a son!'"],
+];
 
-
-let photoF =[
-
-]
+let interactH =[
+    ["TV", "Entertainment News: The Knight Commander is actually an illegitimate child!"],
+    ["photo","You can't make out the face, but this must be her son."],
+];
