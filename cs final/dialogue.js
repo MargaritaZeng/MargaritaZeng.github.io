@@ -10,7 +10,7 @@ let conversation =[//-2
     ["nemorin", "normal","You've been freeloading at my place for quite a while, "],
     ["nemorin", "normal"," I should really start charging you"],
     ["the cat", "speechless","What do you want?"],
-    ["nemorin", "happy","Ta-daa! This!"],// show the progress
+    ["nemorin", "happy","Ta-daa! This!"],// show the progress task 01
     ["nemorin", "normal","Find the Lost Souls."],
     ["nemorin", "normal"," You can see souls anyway,  it shouldn't be hard for you"],
     ["narrator", "none","Oh right, I forgot to mention—"],
@@ -27,10 +27,12 @@ let conversation =[//-2
     ["nemorin", "happy","Don't miss me too much, okay?"],
     ["nemorin", "normal"," If you need anything, just call me."],
     ["nemorin", "normal"," I'm on standby 24h to… "],// move
-    ["nemorin", "cry","Hey—I didn,t  finish my word!!"],
+    ["nemorin", "cry","Hey—I didn't  finish my word!!"],
     ["the cat", "speechless","Ugh… humans are so noisy."],
     ["the cat", "speechless"," Whatever. Let's go"],
     // first part -------(-3) show the chapter transition
+    ["none"],
+    ["none"],
     ["the cat","normal","Should be around here…"],
     ["the cat","normal","Now… who is the lost soul?"],
     // ---- start part ----(-4) find people transition
@@ -53,7 +55,7 @@ let conversation =[//-2
     ["the cat","confuse","And… where is your son?"],
     ["elderly woman","sad","......"],
     ["elderly woman","sad","… actually I haven't seen him in a long, long time…"],
-    ["elderly woman","sad","I really want to see him again…"],
+    ["elderly woman","sad","I really want to see him again…"],// task 02
     ["elderly woman","sad"," I wonder what he looks like now."],
     ["narrator","none","already Found her 'lingering wish'"],
     ["narrator","none","Nemorin didn't find the wrong person — wait no, the wrong cat."],
@@ -73,7 +75,7 @@ let conversation =[//-2
     ["the cat","confuse","Huh?"],
     ["elderly woman","normal","I think I saw his workplace address somewhere… but I forgot where it is…"],
     ["elderly woman","confuse","It should be somewhere inside the house…"],
-    ["narrator","none","Looks like you'll have to search the room."],//find 
+    ["narrator","none","Looks like you'll have to search the room."],//find task03
     //-----------------------------------(-5)transition
     ["elderly woman","surprise","Ah—yes, yes! That's the place!"],
     ["the cat","normal","Great, then let's find him. It's close by."],
@@ -107,7 +109,7 @@ let conversation =[//-2
     ["sereniel","sad"," He wouldn't let me see him again."],
     ["sereniel","sad","I don't even know if Elio still remembers me…"],
     ["sereniel","sad"," Leo is my son's name."],
-    ["the cat","confuse","(that's the Knight Commander's name…?)"],
+    ["the cat","confuse","(that's the Knight Commander's name…?)"],//task 04
     ["sereniel","normal","But seeing him on the news, living well…"],
     ["sereniel","normal"," That's enough for me."],
     ["sereniel","normal"," I don't really have to meet him."],
@@ -147,7 +149,7 @@ let conversation =[//-2
     ["the cat","surprise","Hey! Don't walk away!"],
     ["vallerin","impatient","Security. Please escort this gentleman out."],
     ["the cat","surprise","There's no way I've got the wrong person— at least let me finish before you leave!"],
-
+//task 05
 ];
 
 // home npc --cople

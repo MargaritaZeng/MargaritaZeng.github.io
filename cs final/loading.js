@@ -64,9 +64,10 @@ let frown;
 
 //the chapter name image 
 let chapterName;
-
+// beginner's guide image
+let beginning;
 //the rpg map
-let roadMap;
+let roadMap;             let roadMapF;
 let inHouseMap;
 let officeMap;
 
@@ -105,14 +106,6 @@ async function startpageImg(){
   progreimg = await loadImage("rpggameImg/initial functions/task progre Bu.png");
   backHomeimg = await loadImage("rpggameImg/initial functions/backhome Bu.png");
 
-// -----------------------the seting in the game ------------------
-  bagG = await loadImage("rpggameImg/gaming page/setting/bag Bu.png");
-  guideG = await loadImage("rpggameImg/gaming page/setting/beginner's guide Bu.png");
-  buttonG = await loadImage("rpggameImg/gaming page/setting/button setting Bu.png");
-  returnG = await loadImage("rpggameImg/gaming page/setting/return home Bu.png");
-  progressG = await loadImage("rpggameImg/gaming page/setting/task progress Bu.png");
-  setButtonG = await loadImage("rpggameImg/gaming page/setting/setting button.png");
-
 }
 
 async function allImgHL(){
@@ -139,6 +132,15 @@ async function allImgHL(){
 
 // the img of the game part  -----------------------------------
 async function gamingImg(){
+
+    //the seting in the game
+    bagG = await loadImage("rpggameImg/gaming page/setting/bag Bu.png");
+    guideG = await loadImage("rpggameImg/gaming page/setting/beginner's guide Bu.png");
+    buttonG = await loadImage("rpggameImg/gaming page/setting/button setting Bu.png");
+    returnG = await loadImage("rpggameImg/gaming page/setting/return home Bu.png");
+    progressG = await loadImage("rpggameImg/gaming page/setting/task progress Bu.png");
+    setButtonG = await loadImage("rpggameImg/gaming page/setting/setting button.png");
+
     //the story box
     textBox = await loadImage("rpggameImg/gaming page/text box.png");
     headBoxL = await loadImage("rpggameImg/gaming page/boxL.png");
@@ -167,7 +169,7 @@ async function gamingImg(){
     smile = await loadImage("rpggameImg/gaming page/expression/smile.png");
     sad = await loadImage("rpggameImg/gaming page/expression/sad.png");
     happy = await loadImage("rpggameImg/gaming page/expression/happy.png");
-    impatient = await loadImage("rpggameImg/gaming page/expression/impatirnt.png");
+    impatient = await loadImage("rpggameImg/gaming page/expression/impatient.png");
     speechless = await loadImage("rpggameImg/gaming page/expression/speechless.png");
     confuse = await loadImage("rpggameImg/gaming page/expression/confuse.png");
     surprise = await loadImage("rpggameImg/gaming page/expression/surprise.png");
@@ -181,22 +183,26 @@ async function gamingImg(){
     confuseC = await loadImage("rpggameImg/gaming page/expression/confuseC.png");
     surpriseC = await loadImage("rpggameImg/gaming page/expression/surpriseC.png");
 
+    // things show in the story
     chapterName = await loadImage("rpggameImg/gaming page/chapter1 name.png");
+    beginning = await loadImage("rpggameImg/gaming page/setting/guide.png");
 
     // the rpg map img
     roadMap = await loadImage("rpggameImg/gaming page/RPG map/road.png");
     inHouseMap = await loadImage("rpggameImg/gaming page/RPG map/inside house.png");
     officeMap = await loadImage("rpggameImg/gaming page/RPG map/office.png");
 
+    roadMapF = await loadImage("rpggameImg/gaming page/RPG map/roadF.png");
+
     // the rpg character img
-    nemorinL = await loadImage("rpggameImg/gsming page/rpgpeople/nemorin left.png");
-    theCatL = await loadImage("rpggameImg/gsming page/rpgpeople/Cat left.png");
-    theCatPL = await loadImage("rpggameImg/gsming page/rpgpeople/Catp left.png");
-    serenieL = await loadImage("rpggameImg/gsming page/rpgpeople/serenie left.png");
-    vallerinL = await loadImage("rpggameImg/gsming page/rpgpeople/vallerin left.png");
-    roadNpc1 = await loadImage("rpggameImg/gsming page/rpgpeople/home npc1.png");
-    roadNpc2 = await loadImage("rpggameImg/gsming page/rpgpeople/home npc2.png");
-    roadNpc3 = await loadImage("rpggameImg/gsming page/rpgpeople/home npc3.png");
-    roadNpc4 = await loadImage("rpggameImg/gsming page/rpgpeople/home npc4.png");
+    nemorinL = await loadImage("rpggameImg/gaming page/rpgpeople/nemorin left.png");
+    theCatL = await loadImage("rpggameImg/gaming page/rpgpeople/Cat left.png");
+    theCatPL = await loadImage("rpggameImg/gaming page/rpgpeople/Catp left.png");
+    serenieL = await loadImage("rpggameImg/gaming page/rpgpeople/serenie left.png");
+    vallerinL = await loadImage("rpggameImg/gaming page/rpgpeople/vallerin left.png");
+    roadNpc1 = await loadImage("rpggameImg/gaming page/rpgpeople/home npc1.png");
+    roadNpc2 = await loadImage("rpggameImg/gaming page/rpgpeople/home npc2.png");
+    roadNpc3 = await loadImage("rpggameImg/gaming page/rpgpeople/home npc3.png");
+    roadNpc4 = await loadImage("rpggameImg/gaming page/rpgpeople/home npc4.png");
 }
 

@@ -4,7 +4,7 @@
 
 //check the gamestatus in the game 
 let gameStatus = "startpage" ;
-// startpage mainpage inbutton plot chapterName changeMap
+// startpage mainpage inbutton plot chapterName RPGmove
 let taskNew ="off";
 
 //this is to check the highlight button of starting bage 
@@ -16,13 +16,17 @@ let highlightButtonG = 1;
 
 let settingS = 1;
 let settingG = "closed"; 
+let automatic = false;
 // closed is setting are not show 
 // open is setting is show and closed
-// settingS%2 === 1 is setting is show and closed
+// settingS%2 === 1 is setting is show and open
 // inside is setting open the button
 //this is in the game part
 
-let storyList = 140 ;
+let catX;
+let catY;
+
+let storyList = 25 ;
 
 // --------------------------------seting -----------------------------
 
@@ -34,6 +38,10 @@ function setup() {
   startpageImg();
   allImgHL();
   gamingImg();  
+
+  catX = 756;
+  catY = 180;
+  
 }
 
 
@@ -75,18 +83,27 @@ function draw() {
     text("press space", 900, 780);
   }
   // 27 30 32 72 91 110 +1
-  if(gameStatus === "plot"){  
+  if(gameStatus === "plot" && automatic === false){  
+    rpgMap();
     plotFirst();
     emojy();
-    rpgMap(); 
   }
-  
 
+  if(automatic === true){   
+    image(officeMap, 0, 0, 1200, 800);
+    image(nemorinL,10*boxSizeX,4*boxSizeY,65,90);
+    plotFirst();
+    moveInstr();
+  }
   // ---------------------seting in the game------------ ----------
   if(settingG === "inside"){
     if(highlightButtonG === 1) propBag();
     else if(highlightButtonG === 2) settingUp();
-    else if(highlightButtonG === 5)showImg();  
+    else if(highlightButtonG === 5)showImg(); 
+    else if(highlightButtonG === 4){
+      image(beginning, 300, 150, 600, 400);
+      image(backHomeimgHL, 20, -10, 1200, 800);
+    } 
     else if(highlightButtonG === 3){
       gameStatus = "startpage";
       settingS++;
@@ -101,6 +118,9 @@ function draw() {
     image(taskN, 0, 0, 1200, 800);
   }
 
+  if(gameStatus === "RPGmove"){
+    RPGmoveRoad();
+  }
   stateCheck();
 } 
 //-----------------------------------------setup and drawing ----------------------------------------------------
@@ -117,14 +137,30 @@ function stateCheck(){
   image(task01, 180, 45, 825, 550);
   }
   
-  if(storyList === 14 || storyList === 53 || storyList === 73 || storyList === 105 || storyList === 141){
+  if(storyList === 14 || storyList === 55 || storyList === 75 || storyList === 107 || storyList === 143){
     taskNew = "on" ;
   }
-  
+
+  if(storyList === 27){
+  text(conversation[27][2],240, 675, 720, 200);
+  automatic = true;
+  }
 }
 
 
-
+function moveInstr(){
+  if(moveStep < boxSizeX*2){
+    moveL();
+  }
+  else if(moveStep < boxSizeX*2 + boxSizeY*6){
+    moveD();
+  }
+  else{
+    moveStep = 0;
+    automatic = false;
+    storyList =28;
+  }
+}
 
 //show the page of the starting page 
 function showStartingpage(){
@@ -213,21 +249,35 @@ function keyPressed(){
       if(key === " ") settingG = "inside";
     }
 
-    //-------this is the story part keycode------------------------------
-    else if(gameStatus === "plot"){
-      if(key === " "){
-        if(storyList > 142){
-          settingG = "closed" ;
-          gameStatus = "startpage";
-          taskNew = "off";
-          storyList = 142;
-        }
-        else storyList++ ;
-      } 
-      
-    }    
+    else if(gameStatus === "plot" && automatic === false){
+    if(key === " ") {          
+        print(storyList);
+        storyList++;
+        if(storyList === 35)gameStatus ="RPGmove";
+      }
+    }
   }
 
+  else if(gameStatus === "RPGmove"){
+    if (key === "w" || keyIsDown(38)){
+      characterGoto = "goup";
+    }
+    if (key === "s" || keyIsDown(40)){
+      characterGoto = "godown";
+    }
+    if (key ==="a" || keyIsDown(37)){
+      characterGoto = "goleft";
+    }
+    if (key ==="a" || keyIsDown(37)){
+      characterGoto = "goright";
+    }
+    if(key === " "){
+      
+    }
+  }
+    //-------this is the story part keycode------------------------------
+  
+  
   
 }
 
@@ -290,7 +340,6 @@ function showImg(){
 
   else if(gameStatus === "inButton"){
     // show the img 
-
     if(highlightButtonM===2){
       // show the progress in game and startpage
       //(storyList === 53 || storyList === 73 || storyList === 105 || storyList === 141)
@@ -452,16 +501,65 @@ function emojy(){
   }
 }
 // 27 30 32 72 91 110 +1
+let boxSizeX = 54;
+let boxSizeY = 60;
 
+// the character x is (box-1)*boxsize (box-2)*boxsize;
 function rpgMap(){
   if(storyList < 31){
     image(officeMap, 0, 0, 1200, 800);
-    image(vallerinL, )
+
+    image(nemorinL,10*boxSizeX,4*boxSizeY,65,90);
+    //the cat did not show out after the cat moving 
+    if(storyList <27)image(theCatL, catX, catY, 54, 60);
+    //560, 270, 40, 60
   } 
   else if(storyList >30 && storyList < 73){
-    image(roadMap, 0, 0, 1200, 800);
+  boxSizeX = 55;
+  boxSizeY = 55;
+  //y-1.5*boxsize
+
+  // load the img of the map , characters and prop 
+  image(roadMap, 0, 0, 1200, 800);
+
+  image(roadNpc1, 11*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+  image(roadNpc3, 12*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);//cople
+  image(roadNpc2, 17*boxSizeX,6.5*boxSizeY,boxSizeX,boxSizeY*1.5);//old man
+  image(serenieL, 2*boxSizeX+5,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+
+  image(theCatL,18*boxSizeX,8*boxSizeY,55,55);
+
+
+
+  //the front part of the map img 
+  image(roadMapF, 0, 0, 1200, 800); 
+  image(roadNpc4, 8*boxSizeX,8*boxSizeY,40,55);//child
   } 
   else if(storyList >72 && storyList < 92){
     image(inHouseMap, 0, 0, 1200, 800);
+
   } 
+}
+
+// the move character in firt map road
+function RPGmoveRoad(){
+  boxSizeX = 55;
+  boxSizeY = 55;
+  //y-1.5*boxsize
+
+  // load the img of the map , characters and prop 
+  image(roadMap, 0, 0, 1200, 800);
+
+  image(roadNpc1, 11*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+  image(roadNpc3, 12*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);//cople
+  image(roadNpc2, 17*boxSizeX,6.5*boxSizeY,boxSizeX,boxSizeY*1.5);//old man
+  image(serenieL, 2*boxSizeX+5,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+
+  image(theCatL,18*boxSizeX,8*boxSizeY,55,55);
+
+
+
+  //the front part of the map img 
+  image(roadMapF, 0, 0, 1200, 800); 
+  image(roadNpc4, 8*boxSizeX,8*boxSizeY,40,55);//child
 }
