@@ -26,7 +26,7 @@ let automatic = false;
 let catX;
 let catY;
 
-let storyList = 25 ;
+let storyList = 0;
 
 // --------------------------------seting -----------------------------
 
@@ -96,6 +96,33 @@ function draw() {
     moveInstr();
   }
   // ---------------------seting in the game------------ ----------
+  
+
+  if(gameStatus === "RPGmove"){
+    if(photoG === true && newsG === true && prop === "none"){
+      gameStatus = "plot";
+    }
+    if(mapmove === "roadmap" ){
+    RPGmoveRoad();   
+    catMove();
+    showword();
+    }
+    if(mapmove === "housemap" ){
+      RPGmoveHouse();
+      catMoveH();
+      showwordH();
+    }
+  } 
+
+
+  if(settingG === "open"){
+    //show the setting buttonS
+    image(setButtonG, 0, -30, 1200, 800);
+    settingInside();
+  } 
+  if(taskNew === "on"){
+    image(taskN, 0, 0, 1200, 800);
+  }
   if(settingG === "inside"){
     if(highlightButtonG === 1) propBag();
     else if(highlightButtonG === 2) settingUp();
@@ -109,18 +136,7 @@ function draw() {
       settingS++;
     } 
   }
-  if(settingG === "open"){
-    //show the setting buttonS
-    image(setButtonG, 0, -30, 1200, 800);
-    settingInside();
-  } 
-  if(taskNew === "on"){
-    image(taskN, 0, 0, 1200, 800);
-  }
-
-  if(gameStatus === "RPGmove"){
-    RPGmoveRoad();
-  }
+  
   stateCheck();
 } 
 //-----------------------------------------setup and drawing ----------------------------------------------------
@@ -145,6 +161,8 @@ function stateCheck(){
   text(conversation[27][2],240, 675, 720, 200);
   automatic = true;
   }
+
+ 
 }
 
 
@@ -176,20 +194,17 @@ function keyPressed(){
 //this is the starting page keycode
   if (gameStatus === "startpage"){
     if (key === "w" || keyIsDown(38)){
-      if (highlightButton === 4){
-        highlightButton = 1;
-      }
+      if (highlightButton === 4)highlightButton = 1;
       else highlightButton++;
     }
     if (key === "s" || keyIsDown(40)){
-      if (highlightButton === 1){
-        highlightButton = 4;
-      }
+      if (highlightButton === 1)highlightButton = 4;
       else highlightButton--;
     }
     if(key === " "){
       if(highlightButton === 1){
-        gameStatus = "plot";
+        if(storyList === 34 || storyList === 74)gameStatus ="RPGmove";
+        else gameStatus = "plot";
         settingG = "open"
       }
       else gameStatus = "mainpage";
@@ -198,16 +213,10 @@ function keyPressed(){
 
 //------this is the mainpage keycode------------------------------
   else if(gameStatus === "mainpage"){
-    if (key === "w" || keyIsDown(38)){
-      highlightButtonM++;
-    }
-    if (key === "s" || keyIsDown(40)){
-      highlightButtonM--;
-    }
+    if (key === "w" || keyIsDown(38))highlightButtonM++;
+    if (key === "s" || keyIsDown(40))highlightButtonM--;
     if (key === " "){
-      if(highlightButtonM === 1){
-        gameStatus = "startpage";
-      }
+      if(highlightButtonM === 1)gameStatus = "startpage";
       else gameStatus = "inButton";
     }
   }
@@ -227,6 +236,7 @@ function keyPressed(){
       storyList++;
     }
   }
+
 //-------this is the setting in game's keycode-------------------------------------
   else if(settingG === "open"){
     // open the setting in game 
@@ -250,34 +260,141 @@ function keyPressed(){
     }
 
     else if(gameStatus === "plot" && automatic === false){
+
     if(key === " ") {          
         print(storyList);
         storyList++;
-        if(storyList === 35)gameStatus ="RPGmove";
+        //the road map
+        if(storyList === 34){
+          boxNumX = 18;
+          boxNumY = 8;
+          catX = boxNumX*boxSizeX;
+          catY = boxNumY*boxSizeY;
+          gameStatus ="RPGmove"; 
+          mapmove = "roadmap" ;     
+        }
+        // the inside house map
+        if(storyList === 74){
+          boxNumX = 10;
+          boxNumY = 10;
+          catX = boxNumX*boxSizeX;
+          catY = boxNumY*boxSizeY;
+          mapmove = "housemap" ;
+          gameStatus ="RPGmove";
+          
+        }
+        if(storyList > 91){
+          storyList = 0;
+          catX = 756;
+          catY = 180;
+          gameStatus = "startpage";
+        }
+      }
+    }
+
+    else if(gameStatus === "RPGmove" && !settingS%2 === 0){
+    
+    if(key === "w"|| keyIsDown(38)){
+      moveDir = "up";
+      isMoving = true;
+      
+    }
+    if(key === "s"|| keyIsDown(40)){
+      print("key pressed");
+      moveDir = "down";
+      isMoving = true;
+      
+    }
+    if(key === "a"|| keyIsDown(37)){
+      moveDir = "left";
+      isMoving = true;
+      
+    }
+    if(key === "d" || keyIsDown(39)){
+      moveDir = "right";
+      print("press right");
+      isMoving = true;
+      
+    }
+    if(key === " "){
+      if(mapmove === "roadmap"){
+        //check for the right one
+      if(boxNumX === 3 && boxNumY === 6 || boxNumX === 2 && boxNumY === 7){
+        if(character === "correct")gameStatus ="plot";
+        else character ="correct";       
+      }
+      //check the old man
+      if(boxNumX === 17 && boxNumY === 8 || boxNumX === 16 && boxNumY === 7 || boxNumX === 17 && boxNumY === 6){
+        if(character === "old man")character = "none";
+        else character ="old man";  
+      }
+      //check the child
+      if(boxNumX === 9 && boxNumY === 8 || boxNumX === 8 && boxNumY === 9){
+        if(character === "child")character = "none";
+        else character ="child";  
+      }
+      // check the couple 13 6, 12 7, 11 7, 10 6
+      if(boxNumX === 13 && boxNumY === 6 || boxNumX === 10 && boxNumY === 6 ||boxNumX === 12 && boxNumY === 7 ||boxNumX === 11 && boxNumY === 7){
+        if(character === "couple")character = "none";
+        else character ="couple";  
+      }
+      }
+
+      if(mapmove === "housemap"){
+          // check the ring 
+        if(boxNumX === 12 && boxNumY === 7){
+          if(prop === "ring")prop = "none";
+        else prop = "ring";  
+        }
+        // check the fridge
+        if(boxNumX === 6 && boxNumY === 3){
+          if(prop === "fridge")prop = "none";
+        else prop = "fridge";  
+        }
+        // check the photo
+        if(boxNumX === 14 && boxNumY === 3){
+          if(prop === "photo")prop = "none";
+        else prop = "photo";  
+        }
+        // check the waredore
+        if(boxNumX === 12 && boxNumY === 3){
+          if(prop === "wardore")prop = "none";
+        else prop = "wardore";  
+        }
+        // check the newspaper
+        if(boxNumX === 13 && boxNumY === 7){
+          if(prop === "Newspaper")prop = "none";
+        else prop = "Newspaper";  
+        }
+        // check the tv
+        if(boxNumX === 11 && boxNumY === 9 ||boxNumX === 12 && boxNumY === 8 ||boxNumX === 13 && boxNumY === 9){
+          if(prop === "TV")prop = "none";
+        else prop = "TV";  
+        }
+        // check the album
+        if(boxNumX === 10 && boxNumY === 7 ||boxNumX === 11 && boxNumY === 7){
+          if(prop === "Photo album")prop = "none";
+        else prop = "Photo album";  
+        }
+        // check the bedroom
+        if(boxNumX === 8 && boxNumY === 5){
+          if(prop === "Bedroom")prop = "none";
+        else prop = "Bedroom";  
+        }
+        // check the bedroom
+        if(boxNumX === 5 && boxNumY === 3){
+          if(prop === "box")prop = "none";
+        else prop = "box";  
+        }
+        
       }
     }
   }
 
-  else if(gameStatus === "RPGmove"){
-    if (key === "w" || keyIsDown(38)){
-      characterGoto = "goup";
-    }
-    if (key === "s" || keyIsDown(40)){
-      characterGoto = "godown";
-    }
-    if (key ==="a" || keyIsDown(37)){
-      characterGoto = "goleft";
-    }
-    if (key ==="a" || keyIsDown(37)){
-      characterGoto = "goright";
-    }
-    if(key === " "){
-      
-    }
-  }
+  
     //-------this is the story part keycode------------------------------
   
-  
+} 
   
 }
 
@@ -517,6 +634,7 @@ function rpgMap(){
   else if(storyList >30 && storyList < 73){
   boxSizeX = 55;
   boxSizeY = 55;
+
   //y-1.5*boxsize
 
   // load the img of the map , characters and prop 
@@ -527,7 +645,10 @@ function rpgMap(){
   image(roadNpc2, 17*boxSizeX,6.5*boxSizeY,boxSizeX,boxSizeY*1.5);//old man
   image(serenieL, 2*boxSizeX+5,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
 
-  image(theCatL,18*boxSizeX,8*boxSizeY,55,55);
+  if(storyList > 33){
+    image(theCatL, catX, catY, boxSizeX, boxSizeY);
+  }
+  else image(theCatL,18*boxSizeX,8*boxSizeY,55,55);
 
 
 
@@ -536,7 +657,16 @@ function rpgMap(){
   image(roadNpc4, 8*boxSizeX,8*boxSizeY,40,55);//child
   } 
   else if(storyList >72 && storyList < 92){
+    boxSizeX = 55;
+    boxSizeY = 55;
+
     image(inHouseMap, 0, 0, 1200, 800);
+    //in the house
+    if(storyList > 73 )image(theCatL,catX, catY,55,55);
+    else image(theCatL,10*boxSizeX,10*boxSizeY,55,55);
+
+    image(serenieL, 12*boxSizeX,3.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+    image(inHouseMapF, 0, 0, 1200, 800);
 
   } 
 }
@@ -546,20 +676,33 @@ function RPGmoveRoad(){
   boxSizeX = 55;
   boxSizeY = 55;
   //y-1.5*boxsize
-
   // load the img of the map , characters and prop 
   image(roadMap, 0, 0, 1200, 800);
 
   image(roadNpc1, 11*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
   image(roadNpc3, 12*boxSizeX,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);//cople
-  image(roadNpc2, 17*boxSizeX,6.5*boxSizeY,boxSizeX,boxSizeY*1.5);//old man
+  
   image(serenieL, 2*boxSizeX+5,5.5*boxSizeY,boxSizeX,boxSizeY*1.5);
 
-  image(theCatL,18*boxSizeX,8*boxSizeY,55,55);
+  image(theCatL, catX, catY, boxSizeX, boxSizeY);
 
 
-
+  image(roadNpc2, 17*boxSizeX,6.5*boxSizeY,boxSizeX,boxSizeY*1.5);//old man
   //the front part of the map img 
   image(roadMapF, 0, 0, 1200, 800); 
   image(roadNpc4, 8*boxSizeX,8*boxSizeY,40,55);//child
+  
+}
+
+function RPGmoveHouse(){
+  boxSizeX = 55;
+  boxSizeY = 55;
+
+  image(inHouseMap, 0, 0, 1200, 800);
+    //in the house
+  image(theCatL,catX, catY,55,55);
+  image(serenieL, 12*boxSizeX,3.5*boxSizeY,boxSizeX,boxSizeY*1.5);
+
+  image(inHouseMapF, 0, 0, 1200, 800);
+    
 }

@@ -68,14 +68,14 @@ let chapterName;
 let beginning;
 //the rpg map
 let roadMap;             let roadMapF;
-let inHouseMap;
+let inHouseMap;          let inHouseMapF;
 let officeMap;
 
 // show the rpg characters in map img 
-let nemorinL;            let nemorinR; 
+let nemorinL;            
 let theCatL;             let theCatR;
 let theCatPL;            let theCatPR;
-let serenieL;            let serenieR;
+let serenieL;            
 let vallerinL;           let vallerinR;
 let roadNpc1;            let comNpc1;
 let roadNpc2;            let comNpc2;
@@ -193,10 +193,12 @@ async function gamingImg(){
     officeMap = await loadImage("rpggameImg/gaming page/RPG map/office.png");
 
     roadMapF = await loadImage("rpggameImg/gaming page/RPG map/roadF.png");
+    inHouseMapF = await loadImage("rpggameImg/gaming page/RPG map/inside houseF.png");
 
     // the rpg character img
     nemorinL = await loadImage("rpggameImg/gaming page/rpgpeople/nemorin left.png");
     theCatL = await loadImage("rpggameImg/gaming page/rpgpeople/Cat left.png");
+    theCatR = await loadImage("rpggameImg/gaming page/rpgpeople/Cat right.png");
     theCatPL = await loadImage("rpggameImg/gaming page/rpgpeople/Catp left.png");
     serenieL = await loadImage("rpggameImg/gaming page/rpgpeople/serenie left.png");
     vallerinL = await loadImage("rpggameImg/gaming page/rpgpeople/vallerin left.png");

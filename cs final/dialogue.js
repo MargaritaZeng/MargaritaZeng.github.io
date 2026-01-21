@@ -31,8 +31,7 @@ let conversation =[//-2
     ["the cat", "speechless","Ugh… humans are so noisy."],
     ["the cat", "speechless"," Whatever. Let's go"],
     // first part -------(-3) show the chapter transition
-    ["none"],
-    ["none"],
+    ["none"],//32
     ["the cat","normal","Should be around here…"],
     ["the cat","normal","Now… who is the lost soul?"],
     // ---- start part ----(-4) find people transition
@@ -40,7 +39,7 @@ let conversation =[//-2
     ["elderly woman","normal","......"],
     ["the cat","confuse","Can't you hear me ? I'm right here."],
     ["elderly woman","normal","......"],
-    ["the cat","none","(pokes her)"],
+    ["the cat","none","(push her)"],
     ["elderly woman","surprise","Oh! That scared me!"],
     ["elderly woman","surprise"," A… a little cat?"],
     ["the cat","normal","Hello."],
@@ -77,6 +76,7 @@ let conversation =[//-2
     ["elderly woman","confuse","It should be somewhere inside the house…"],
     ["narrator","none","Looks like you'll have to search the room."],//find task03
     //-----------------------------------(-5)transition
+    ["none"],//74
     ["elderly woman","surprise","Ah—yes, yes! That's the place!"],
     ["the cat","normal","Great, then let's find him. It's close by."],
     ["elderly woman","confuse","But…How am I supposed to go anywhere?"],
@@ -152,28 +152,9 @@ let conversation =[//-2
 //task 05
 ];
 
-// home npc --cople
-let cople =[
+// home npc 
+let couple =[
     ["girl","That's weird… I feel like someone's staring at me."],
     ["boy","Honey, it's just your imagination. There's barely anyone on this street."],
     ["girl","…Wish so"],
-];
-// home npc 
-let interaction =[
-    ["young man","Changed to a child? Really?"],
-    ["old man","It's definitely a woman you're looking for, not a man."],
-    ["correct","…It's her."],
-];
-//  things in home map
-let newspaper =[
-    ["'A medium helping spirits solve cases for the police…'"],
-    ["'A new Knight Commander sworn in'"],
-    ["'A day in the life of the Knight Commander'"],
-    ["'Shocking! The young Knight Commander turns out to be in his second marriage'"],
-    ["'—and already has a son!'"],
-];
-
-let interactH =[
-    ["TV", "Entertainment News: The Knight Commander is actually an illegitimate child!"],
-    ["photo","You can't make out the face, but this must be her son."],
 ];
